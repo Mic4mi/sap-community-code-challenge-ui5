@@ -71,6 +71,14 @@ sap.ui.define(
 
                 this.oDefaultDialog.open();
             },
+
+            onSendName: function () {
+                const oInput = this.byId("nameInput");
+                const oText = this.byId("nameText");
+                oInput.getValue() != ''
+                    ? oText.setText(oInput.getValue())
+                    : oText.setText("It seems that there is no name...");
+            }
         });
     }
 );

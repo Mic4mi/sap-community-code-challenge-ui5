@@ -34,4 +34,32 @@ describe("week3: detail page", () => {
         const dialog = await $("#myDialog")
         expect(dialog.error).toBeFalsy()
     })
+
+    it("After typing in the input, the button should make the input value appear as text", async () => {
+        const oInput = await browser.asControl({
+            selector: {
+                id: "nameInput",
+                viewName: Detail._viewName
+            }
+        });
+        await oInput.setValue('Mica');
+
+        const oButton = await browser.asControl({
+            selector: {
+                id: "sendNameBtn",
+                viewName: Detail._viewName
+            }
+        });
+        await oButton.firePress();
+
+        const oText = await browser.asControl({
+            selector: {
+                id: "nameText",
+                viewName: Detail._viewName
+            }
+        });
+        const sText = await oText.getText();
+
+        expect(sText).toBe('Mica');
+    })
 })
