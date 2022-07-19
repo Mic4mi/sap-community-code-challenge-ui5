@@ -79,7 +79,7 @@
         },
         {
           "name": "Detail",
-          "pattern": "RouteDetail/",
+          "pattern": "RouteDetail",
           "target": [
             "TargetDetail"
           ]

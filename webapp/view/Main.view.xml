@@ -1,19 +1,80 @@
-<mvc:View controllerName="ui5.challenge.controller.Main"
-    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
+<mvc:View controllerName="ui5.challenge.controller.Main" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
 
     <Page id="MainPage" showHeader="false">
         <subHeader>
             <OverflowToolbar>
-                <Title text="Products" class="sapUiSmallMarginBegin"/>
-                <ToolbarSpacer/>
-                <SearchField liveChange=".onSearch" width="20%" />
-                <Button text="Click me!" press=".onDoSomething"/>
-                <Button text="Go to detail" press=".onNavigateToDetail"/>
+                <Title text="{i18n>mainTitleText}" class="sapUiSmallMarginBegin" />
+                <ToolbarSpacer />
+                <Button id="mainButton" text="Click me!" press=".onDoSomething" />
+                <!-- <Button id="myControl" text="Go to detail" press=".onNavigateToDetail" /> -->
             </OverflowToolbar>
         </subHeader>
-        <List items="{mainModel>/}" showHeader="false" growing="true" growingThreshold="6" growingScrollToLoad="false">
-            <StandardListItem title="{mainModel>Name}" description="{mainModel>ProductId}" icon="{mainModel>ProductPicUrl}" iconDensityAware="false" iconInset="false" />
-        </List>
+
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+            <List id="myList" headerText="Products" binding="{mainModel>/}">
+                <StandardListItem id="myControl" title="{mainModel>/0/Name}" description="{mainModel>/0/ProductId}" press=".onNavigateToDetail" type="Navigation" />
+                <StandardListItem title="{mainModel>/1/Name}" description="{mainModel>/1/ProductId}" />
+                <StandardListItem title="{mainModel>/2/Name}" description="{mainModel>/2/ProductId}" />
+                <StandardListItem title="{mainModel>/3/Name}" description="{mainModel>/3/ProductId}" />
+            </List>
+        </Panel>
+
+        <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+            <Table id="idProductsTable" inset="false" items="{
+                path: 'mainModel>/',
+                sorter: {
+                    path: 'Name'
+                }}">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <content>
+                            <Title text="Products" level="H2" />
+                            <ToolbarSpacer />
+                            <SearchField id="mySearchfield" liveChange=".onSearchProduct" width="20%" />
+                        </content>
+                    </OverflowToolbar>
+                </headerToolbar>
+                <columns>
+                    <Column width="12em">
+                        <Text text="Product" />
+                    </Column>
+                    <Column minScreenWidth="Tablet" demandPopin="true">
+                        <Text text="Supplier" />
+                    </Column>
+                    <Column minScreenWidth="Desktop" demandPopin="true" hAlign="End">
+                        <Text text="Description" />
+                    </Column>
+                    <Column hAlign="End">
+                        <Text text="Price" />
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem vAlign="Middle">
+                        <cells>
+                            <Text text="{mainModel>Name}" />
+                            <Text text="{mainModel>SupplierName}" />
+                            <Text text="{mainModel>ShortDescription}" />
+                            <Text text="${mainModel>Price}" />
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </Panel>
+
+
+        <!-- <IconTabBar class="sapUiSmallMarginBottom sapUiResponsiveContentPadding">
+            <items>
+                <IconTabFilter id="icon tab bar" text="List of Products">
+                    <List id="myList" headerText="Products" binding="{mainModel>/}">
+                        <StandardListItem id="myControl" title="{mainModel>/0/Name}" description="{mainModel>/0/ProductId}" press=".onNavigateToDetail" type="Navigation" />
+                        <StandardListItem title="{mainModel>/1/Name}" description="{mainModel>/1/ProductId}" />
+                        <StandardListItem title="{mainModel>/2/Name}" description="{mainModel>/2/ProductId}" />
+                        <StandardListItem title="{mainModel>/3/Name}" description="{mainModel>/3/ProductId}" />
+                    </List>
+                </IconTabFilter>
+                <IconTabFilter text="+Info">
+                </IconTabFilter>
+            </items>
+        </IconTabBar> -->
     </Page>
 </mvc:View>
