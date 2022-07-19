@@ -1,5 +1,6 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<mvc:View controllerName="ui5.challenge.controller.App" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
     <Shell id="shell">
-        <App id="app" />
+        <App id="app">
+        </App>
     </Shell>
 </mvc:View>

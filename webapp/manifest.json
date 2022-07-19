@@ -3,6 +3,7 @@
   "sap.app": {
     "id": "ui5.challenge",
     "type": "application",
+    "i18n": "i18n/i18n.properties",
     "applicationVersion": {
       "version": "0.0.1"
     },
@@ -37,6 +38,27 @@
       "compact": true,
       "cozy": true
     },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "ui5.challenge.i18n.i18n"
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "rootView": {
+      "viewName": "ui5.challenge.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "app"
+    },
     "routing": {
       "config": {
         "routerClass": "sap.m.routing.Router",
@@ -47,20 +69,43 @@
         "controlId": "app",
         "clearControlAggregation": false
       },
-      "routes": [],
-      "targets": {}
-    },
-    "rootView": {
-      "viewName": "ui5.challenge.view.App",
-      "type": "XML",
-      "async": true,
-      "id": "app"
-    },
-    "models": {
-      "i18n": {
-        "type": "sap.ui.model.resource.ResourceModel",
-        "settings": {
-          "bundleName": "ui5.challenge.i18n.i18n"
+      "routes": [
+        {
+          "name": "Main",
+          "pattern": "",
+          "target": [
+            "TargetMain"
+          ]
+        },
+        {
+          "name": "Detail",
+          "pattern": "RouteDetail/",
+          "target": [
+            "TargetDetail"
+          ]
+        }
+      ],
+      "targets": {
+        "TargetMain": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Main",
+          "viewName": "Main"
+        },
+        "TargetDetail": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Detail",
+          "viewName": "Detail"
+        },
+        "TargetApp": {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": false,
+          "viewId": "Main",
+          "viewName": "Main"
         }
       }
     }
