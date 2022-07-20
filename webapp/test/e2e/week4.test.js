@@ -19,6 +19,23 @@ describe("week4: main page", () => {
         await Main.open()
     })
 
+    // Selector conseguido con test-recorder!
+    it("this item should exist", async () => {
+        // Acá copio las lineas y reemplazo viewId por viewName
+        const item = await browser.asControl({
+            controlType: "sap.m.Text",
+            viewName: Main._viewName,
+            bindingPath: {
+                path: "/0",
+                propertyPath: "Name",
+                modelName: "mainModel"
+            }
+        })
+
+        expect(item).toBeTruthy();
+    })
+
+
     it("The searchfield should filter the table", async () => {
         // First, we must fetch the searchfield, insert a value in it and fire its event       
         const Searchfield = await browser.asControl({
