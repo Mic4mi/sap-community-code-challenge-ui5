@@ -46,6 +46,7 @@ describe("week4: main page", () => {
         });
 
         await Searchfield.setValue('18');
+        await browser.screenshot("master-screenshot2-shouldBeAValueInTheSearchField");
         await Searchfield.fireLiveChange();
 
         // Then, we must check that the items in the table have been filtered
@@ -57,6 +58,7 @@ describe("week4: main page", () => {
         })
 
         const TableItems = await Table.getItems();
+        await browser.screenshot("master-screenshot3-shoulBeAFilteredTable");
         expect(TableItems.length).toBe(1)
     })
 })

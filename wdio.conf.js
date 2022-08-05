@@ -5,7 +5,7 @@ exports.config = {
         logLevel: "error", // [optional] error | verbose | silent, default: "error"
         url: "index.html", // [mandatory] {string} name of your bootstrap html file. If your server autoredirects to a 'domain:port/'-like root url, use empty string ''
         skipInjectUI5OnStart: false, // [optional] {boolean}, default: false; true when UI5 is not on the start page, you need to later call <wdioUI5service>.injectUI5() manually
-        waitForUI5Timeout: 15000 // [optional] {number}, default: 15000; maximum waiting time in milliseconds while checking for UI5 availability
+        waitForUI5Timeout: 40000 // [optional] {number}, default: 15000; maximum waiting time in milliseconds while checking for UI5 availability
     },
     //
     // ====================
@@ -31,6 +31,17 @@ exports.config = {
     specs: [
         './webapp/test/e2e/*.test.js'
     ],
+    // define specific suites
+    suites: {
+        main_page: [
+            './webapp/test/e2e/week1.test.js'
+            // './webapp/test/e2e/week2.test.js',
+            // './webapp/test/e2e/week4.test.js'
+        ],
+        detail_page: [
+            './webapp/test/e2e/week3.test.js'
+        ]
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -67,11 +78,11 @@ exports.config = {
         browserName: 'chrome',
         acceptInsecureCerts: true,
         "goog:chromeOptions": {
-            // args:
-            //     process.argv.indexOf("--headless") > -1
-            //         ? ["--headless"]
-            //         : []
-            args: process.env.DEBUG ? ["--auto-open-devtools-for-tabs"] : []
+            args:
+                process.argv.indexOf("--headless") > -1
+                    ? ["--headless"]
+                    : []
+            // args: process.env.DEBUG ? ["--auto-open-devtools-for-tabs"] : []
         }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
@@ -211,6 +222,10 @@ exports.config = {
      * @param {Object}         browser      instance of created browser/device session
      */
     // before: function (capabilities, specs) {
+    //     browser.setNetworkConditions({
+    //         latency: 2000,
+    //         throughput: 450 * 1024
+    //     })
     // },
     /**
      * Runs before a WebdriverIO command gets executed.

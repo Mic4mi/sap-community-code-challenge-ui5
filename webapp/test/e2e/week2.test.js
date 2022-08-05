@@ -30,6 +30,7 @@ describe("week2: main page", () => {
               }
         })
         await control.firePress()
+        await browser.screenshot("detail-screenshot1-shouldBeAbleToNavigateToDetail");
         const url = await browser.getUrl()
         expect(url).toMatch(/.*#\/RouteDetail$/)
     })

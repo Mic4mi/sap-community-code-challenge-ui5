@@ -14,9 +14,10 @@ describe("week1: main page", () => {
     it("should have button with text", async () => {
         const button = await browser.asControl({
             selector: {
+                interaction: "root",
                 id: "mainButton",
                 viewName: Main._viewName
-              }
+            }
         })
         const buttonText = await button.getText()
         expect(buttonText).not.toEqual("")
@@ -25,11 +26,13 @@ describe("week1: main page", () => {
     it("should have list with at least three items", async () => {
         const List = await browser.asControl({
             selector: {
+                interaction: "root",
                 controlType: "sap.m.List",
                 viewName: Main._viewName
-              }
+            }
         })
-        const ListItems = await List.getItems()
+        await browser.screenshot("master-screenshot1-shouldHaveAListWithItems");
+        const ListItems = await List.getItems(true)
         expect(ListItems.length).toBeGreaterThanOrEqual(3)
     })
 })

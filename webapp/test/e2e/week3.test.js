@@ -43,7 +43,7 @@ describe("week3: detail page", () => {
 
         //it's also possible to use WebdriverIO selectors
         const dialog = await $("#myDialog")
-        await browser.screenshot("screenshot1");
+        await browser.screenshot("detail-screenshot2-shouldBeADialogOpen");
         expect(dialog.error).toBeFalsy()
     })
 
@@ -54,21 +54,21 @@ describe("week3: detail page", () => {
                 searchOpenDialogs: true
             }
         })
-        await browser.screenshot("screenshot2");
         expect(oDialog.close()).toBeTruthy()
+        await browser.screenshot("detail-screenshot3-shouldBeADialogClosed");
     })
 
 
     it("after typing in the input, the button should make the input value appear as text", async () => {
         const oInput = await browser.asControl(oInputSelector);
         await oInput.setValue('Mica');
-        await browser.screenshot("screenshot3");
+        await browser.screenshot("detail-screenshot4-shouldBeAValueInTheInput");
         const oButton = await browser.asControl(oButtonSelector);
         await oButton.firePress();
 
         const oText = await browser.asControl(oTextSelector);
         const sText = await oText.getText();
-        await browser.screenshot("screenshot4");
+        await browser.screenshot("detail-screenshot5-shouldBeATextValue");
         expect(sText).toBe('Mica');
     })
 
@@ -81,7 +81,7 @@ describe("week3: detail page", () => {
 
         const oText = await browser.asControl(oTextSelector);
         const sText = await oText.getText();
-        await browser.screenshot("screenshot5");
+        await browser.screenshot("detail-screenshot6-shouldBeAWarningMessage");
 
         expect(sText).toBe('It seems that there is no name...');
     })
