@@ -22,7 +22,6 @@ describe("week1: main page", () => {
         expect(buttonText).not.toEqual("")
     })
 
-
     it("should have list with at least three items", async () => {
         const List = await browser.asControl({
             selector: {
